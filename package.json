@@ -1,0 +1,41 @@
+{
+  "name": "smart-dialer-prototype",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A safety-first progressive and predictive SmartDialer prototype.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "tsc -p tsconfig.build.json && node dist/api/server.js",
+    "start": "node dist/api/server.js",
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:integration": "vitest run tests/integration",
+    "test:watch": "vitest",
+    "db:up": "docker compose up -d postgres",
+    "db:down": "docker compose down",
+    "db:migrate": "tsc -p tsconfig.build.json && node dist/cli/migrate.js",
+    "db:seed": "tsc -p tsconfig.build.json && node dist/cli/seed.js",
+    "db:reset-demo": "tsc -p tsconfig.build.json && node dist/cli/reset-demo.js",
+    "campaign:tick": "tsc -p tsconfig.build.json && node dist/cli/tick.js",
+    "worker": "tsc -p tsconfig.build.json && node dist/cli/worker.js",
+    "simulate": "tsc -p tsconfig.build.json && node dist/cli/simulate.js",
+    "evaluate": "tsc -p tsconfig.build.json && node dist/cli/evaluate.js",
+    "loadtest": "tsc -p tsconfig.build.json && node dist/cli/load-test.js",
+    "verify": "pnpm typecheck && pnpm test && pnpm evaluate && pnpm loadtest"
+  },
+  "dependencies": {
+    "dotenv": "17.4.2",
+    "fastify": "5.12.1",
+    "pg": "8.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.0",
+    "@types/pg": "8.23.1",
+    "typescript": "7.0.2",
+    "vitest": "4.1.11"
+  }
+}
